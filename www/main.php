@@ -1,10 +1,75 @@
 <html>
 	<head>
 		<title>My Work Time</title>
+		<link href='css/menu.css' rel='stylesheet' type='text/css'>
 	</head>
 <body>
+<div class="navcont">
+<div class="nav">
+		<ul>
+			<li><a href="?">Home</a></li>
+			<li class="drop">
+				<a href="?about">About</a>			
+			</li>
+			<!-- li><a href="#">HELP</a></li>
+            <li class="drop">
+            <a href="#">HOME ALONE</a>
+            <div class="dropdownContain">
+					<div class="dropOut">
+						
+						<ul>
+							<li>ABOUT ME</li>
+							<li>ABOUT ME</li>
+							<li>ABOUT ME</li>
+							<li>ABOUT ME</li>
+						</ul>
+					</div>
+				</div>
+			
+			</li>
+			<li class="drop">
+				<a href="#">ABOUT</a>
+				
+				<div class="dropdownContain">
+					<div class="dropOut">
+						
+						<ul>
+							<li>ABOUT ME</li>
+							<li>ABOUT ME</li>
+							<li>ABOUT ME</li>
+							<li>ABOUT ME</li>
+						</ul>
+					</div>
+				</div>
+			
+			</li>
+			<li><a href="#">HELP</a></li -->
+		</ul>
+</div>
+</div>
+<br>
+<br>
 <?
-	include_once("config.php");
+if (isset($_GET['about'])) {
+	?>
+		<center>
+			This simple project <br>
+			Style for menu got from:
+				<a href="http://cssdeck.com/labs/dropdown">http://cssdeck.com/labs/dropdown</a><br>
+			Author: sea-kg (mrseakg@gmail.com)<br>
+		</center>
+	<?
+} else {
+?>
+
+<center>
+Filter: from <input type="text"> to <input type="text"> <br>
+List of periods with comments <br>
+(with pages and calculte hours)
+
+</center>
+<?
+	include_once("config/config.php");
 	
 	$query = "select * from periods";
 	foreach ($conn->query($query) as $row) {
@@ -13,6 +78,8 @@
 		}
 	}
 ?>
+
+
 
 <table>
 	<tr>
@@ -98,7 +165,23 @@
 		// echo $w.' '.$per1_start.' - '.$per1_end.'; '.$per2_start.' - '.$per2_end.'; <br>';
 		$date = mktime(0, 0, 0, date("m", $date) , date("d", $date)+1, date("Y", $date));
 	}
+}
 ?>
+
+<center>
+Add:<br>
+Date: <input type="text"><br>
+Type: <select>
+		<option>Work</option>
+		<option>Sleep</option>
+	</select>
+	<br>
+From (HH:MM) <input type="text"><br>
+To (HH:MM) <input type="text"><br>
+Comment: <textarea></textarea><br>
+
+</center>
+
 
 </body>
 </html>

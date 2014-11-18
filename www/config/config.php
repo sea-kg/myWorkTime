@@ -1,5 +1,5 @@
 <?
-// error_reporting(0);
+
 session_start();
 
 $user = 'myworktime';
@@ -13,5 +13,3 @@ function refreshTo($new_page)
         header ("Location: $new_page");
         exit;
 };
-?>
-
