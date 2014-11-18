@@ -1,0 +1,15 @@
+
+all queryies is POST
+answer will be as json object
+
+http://{url}/api/auth/signin?login=admin&pass=admin
+http://{url}/api/auth/signout
+http://{url}/api/time/list?start=2014-09-16&end=2014-09-17
+http://{url}/api/time/insert?start=2014-09-16 00:00:00&end=2014-09-17 00:00:00
+http://{url}/api/time/update?id=342&start=2014-09-16 00:00:00&end=2014-09-17 00:00:00
+http://{url}/api/time/delete?id=342
+http://{url}/api/comment/insert?idtime=20&comment=your comment
+http://{url}/api/comment/update?id=332&comment=your comment
+http://{url}/api/comment/delete?id=332
+
+
