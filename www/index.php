@@ -1,8 +1,8 @@
 <?
 include_once "config/config.php";
-include_once "engine/auth.php";
-$auth = new auth();
-if($auth->isLogged())
+include_once "api/api.lib/auth.php";
+
+if(mwtAuth::isLogin())
 {
 	refreshTo("main.php");
 	return;

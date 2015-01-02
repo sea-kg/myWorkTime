@@ -17,11 +17,15 @@ class mwtAuth {
 			return true;
 		} catch(PDOException $e) {
 			return false;
-		}		
+		}
 	}
 	
 	static function isLogin() {
 		return isset($_SESSION['user']);
+	}
+	
+	static function userid() {
+		return isset($_SESSION['user']) && isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : 0;
 	}
 	
 	static function tryLogout($conn) {
