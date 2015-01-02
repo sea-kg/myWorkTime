@@ -1,29 +1,29 @@
 <?php
 
 $curdir = dirname(__FILE__);
-include ($curdir."/../../engine/auth.php");
-
-$auth = new auth();
+include ($curdir."/../../config/config.php");
+include ($curdir."/../api.lib/base.php");
+include ($curdir."/../api.lib/auth.php");
 
 $result = array(
 	'result' => 'fail',
 	'data' => array(),
 );
 
-if (isset($_GET['email']) && isset($_GET['password'])) {
-	$email = $_GET['email'];
-	$password = $_GET['password'];
+if (mwtBase::issetParam('email') && mwtBase::issetParam('password')) {
+	$email = mwtBase::getParam('email', '');
+	$password = mwtBase::getParam('password', '');
+	
+	mwtAuth::tryLogout($conn);
+	mwtAuth::tryLogin($conn, $email, $password);
 
-	if( $auth->login($_GET['email'], $_GET['password']) ) {
-		$result['result'] = 'ok';
+	if (!mwtAuth::isLogin()) {
+		mwtBase::throwError(1000, "Could not login");
 	} else {
-		$result['error']['code'] = '102';
-		$result['error']['message'] = 'Error 102: it was not found login or password';
+		$result['result'] = 'ok';
 	}
 } else {
-	$result['error']['code'] = '101';
-	$result['error']['message'] = 'Error 101: it was not found login or password';
+	mwtBase::throwError(1001, "It was not found email or password");
 }
-
 
 echo json_encode($result);
