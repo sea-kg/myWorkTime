@@ -27,10 +27,10 @@ function loadRealTimePanel()
 			
 			var content = '';
 			content += '<div class="time_row_h">\n';
-			content += '	<div class="time_cell">Date</div>\n';
-			content += '	<div class="time_cell">Time</div>\n';
-			content += '	<div class="time_cell">Summary</div>\n';
-			content += '	<div class="time_cell">Comment</div>\n';
+			content += '	<div class="time_cell_h">Date</div>\n';
+			content += '	<div class="time_cell_h">Time</div>\n';
+			content += '	<div class="time_cell_h">Summary</div>\n';
+			content += '	<div class="time_cell_h">Comment</div>\n';
 			content += '</div>\n';
 			tt.innerHTML += content;
 
@@ -44,7 +44,7 @@ function loadRealTimePanel()
 				content = '';
 				content += '<div class="time_row" onclick="editFormRealtime(' + obj.data[i].id + ');">\n';
 				content += '	<div class="time_cell">' + date1 + '</div>\n';
-				content += '	<div class="time_cell">' + time1 + ' - ' + time2 + '</div>\n';
+				content += '	<div class="time_cell">' + time1 + '-' + time2 + '</div>\n';
 				content += '	<div class="time_cell">' + obj.data[i].sum + '</div>\n';
 				content += '	<div class="time_cell"><pre>' + obj.data[i].comment + '</pre></div>\n';
 				content += '</div>\n';

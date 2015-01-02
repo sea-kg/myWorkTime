@@ -70,10 +70,16 @@
 	background-color: #eee;
 }
 
-.time_cell {
+.time_cell_h {
 	display: table-cell;
 	padding: 8px;
 	text-align: center;
+}
+
+.time_cell {
+	display: table-cell;
+	padding: 8px;
+	text-align: left;
 }
 
 .overlay {
