@@ -16,12 +16,11 @@ $result = array(
 if (mwtBase::issetParam('id'))
 {
 	$id = mwtBase::getParam('id', 0);
-	$userid = mwtAuth::userid();
 
 	try {
 		
-		$stmt = $conn->prepare('DELETE FROM realtime WHERE id = ? AND userid = ?');
-		if ($stmt->execute(array($id,$userid)) == 1)
+		$stmt = $conn->prepare('DELETE FROM plantime WHERE id = ?');
+		if ($stmt->execute(array($id)) == 1)
 			$result['result'] = 'ok';
 	} catch(PDOException $e) {
 		mwtBase::throwError(1020, $e);

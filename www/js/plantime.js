@@ -1,19 +1,19 @@
 
-function loadRealTimePanel()
+function loadPlanTimePanel()
 {
 	var el = document.getElementById("content");
 	var params = {};
 	params.start_time = document.getElementById("start_time").value;
 	params.stop_time = document.getElementById("stop_time").value;
 	
-	el.innerHTML = 'Realtime from ' + params.start_time + ' to ' + params.stop_time + ' <br>\n';
+	el.innerHTML = 'Plantime from ' + params.start_time + ' to ' + params.stop_time + ' <br>\n';
 	el.innerHTML += '\n<div class="time_table" id="table_time"></div>\n';
 
 	var tt = document.getElementById("table_time");
 	tt.innerHTML = 'Please wait... ';
 	
  	send_request_post(
-		'api/time/realtime.php',
+		'api/time/plantime.php',
 		createUrlFromObj(params),
 		function (obj) {
 			var tt = document.getElementById("table_time");
@@ -23,14 +23,12 @@ function loadRealTimePanel()
 				return;
 			}
 			tt.innerHTML = '\n';
-			// tt.innerHTML += '<div> Summary time: ' + obj.sum_time + '</div>';
 			
 			var content = '';
 			content += '<div class="time_row_h">\n';
 			content += '	<div class="time_cell_h">Date</div>\n';
 			content += '	<div class="time_cell_h">Time</div>\n';
 			content += '	<div class="time_cell_h">Summary</div>\n';
-			content += '	<div class="time_cell_h">Comment</div>\n';
 			content += '</div>\n';
 			tt.innerHTML += content;
 
@@ -42,11 +40,10 @@ function loadRealTimePanel()
 				var time2 = obj.data[i].stop_time.split(' ')[1];
 
 				content = '';
-				content += '<div class="time_row" onclick="editFormRealtime(' + obj.data[i].id + ');">\n';
+				content += '<div class="time_row" onclick="editFormPlantime(' + obj.data[i].id + ');">\n';
 				content += '	<div class="time_cell">' + date1 + '</div>\n';
 				content += '	<div class="time_cell">' + time1 + '-' + time2 + '</div>\n';
 				content += '	<div class="time_cell">' + obj.data[i].sum + '</div>\n';
-				content += '	<div class="time_cell"><pre>' + obj.data[i].comment + '</pre></div>\n';
 				content += '</div>\n';
 				tt.innerHTML += content;
 			}
@@ -62,50 +59,48 @@ function loadRealTimePanel()
 		}
  	);
 	
-	el.innerHTML += '<div class="btn" onclick="insertFormRealtime();">add new</div>';
+	el.innerHTML += '<div class="btn" onclick="insertFormPlantime();">add new</div>';
 };
 
-function insertFormRealtime() {
+function insertFormPlantime() {
 	var content = '';
 	var start_time = document.getElementById("start_time").value;
 	start_time = start_time.split(' ')[0];
 	content += 'Date: <input id="insert_date" type="text" value="' + start_time + '"><br>';
 	content += 'Time from <input id="insert_start_time" type="text" value="00:00:00"> <br>';
 	content += 'Time to <input id="insert_stop_time" type="text" value="00:00:00"><br>';
-	content += 'Comment:<br> <textarea id="insert_comment"></textarea><br>';
-	content += '<div class="btn" onclick="insertRealtime();">insert</div>';
+	content += '<div class="btn" onclick="insertPlantime();">insert</div>';
 	showModalDialog(content);
 }
 
-function insertRealtime() {
+function insertPlantime() {
 	var date0 = document.getElementById("insert_date").value;
 	var params = {};
 	params.start_time = date0 + ' ' + document.getElementById("insert_start_time").value;
 	params.stop_time = date0 + ' ' + document.getElementById("insert_stop_time").value;
-	params.comment = document.getElementById("insert_comment").value;
 
 	// alert(createUrlFromObj(params));
 	send_request_post(
-		'api/time/realtime_insert.php',
+		'api/time/plantime_insert.php',
 		createUrlFromObj(params),
 		function (obj) {
 			if (obj.result == 'fail') {
 				alert(obj.error.message);
 				return;
 			} else {
-				loadRealTimePanel();
+				loadPlanTimePanel();
 				closeModalDialog();
 			}
 		}
 	);
 }
 
-function editFormRealtime(id) {
+function editFormPlantime(id) {
 	var params = {};
 	params.id = id;
 
 	send_request_post(
-		'api/time/realtime_get.php',
+		'api/time/plantime_get.php',
 		createUrlFromObj(params),
 		function (obj) {
 			if (obj.result == 'fail') {
@@ -119,16 +114,15 @@ function editFormRealtime(id) {
 				content += 'Date: <input id="update_date" type="text" value="' + date0 + '"><br>';
 				content += 'Time from <input id="update_start_time" type="text" value="' + start_time + '"> <br>';
 				content += 'Time to <input id="update_stop_time" type="text" value="' + stop_time + '"><br>';
-				content += 'Comment:<br> <textarea id="update_comment">' + obj.data.comment + '</textarea><br>';
-				content += '<div class="btn" onclick="updateRealtime(' + id + ');">update</div> ';
-				content += '<div class="btn" onclick="deleteRealtime(' + id + ');">delete</div>';
+				content += '<div class="btn" onclick="updatePlantime(' + id + ');">update</div> ';
+				content += '<div class="btn" onclick="deletePlantime(' + id + ');">delete</div>';
 				showModalDialog(content);
 			}
 		}
 	);
 }
 
-function deleteRealtime(id) {
+function deletePlantime(id) {
 	if (!confirm("Are you sure that wand remove this record?"))
 		return;
 
@@ -136,37 +130,36 @@ function deleteRealtime(id) {
 	params.id = id;
 
 	send_request_post(
-		'api/time/realtime_delete.php',
+		'api/time/plantime_delete.php',
 		createUrlFromObj(params),
 		function (obj) {
 			if (obj.result == 'fail') {
 				alert(obj.error.message);
 				return;
 			} else {
-				loadRealTimePanel();
+				loadPlanTimePanel();
 				closeModalDialog();
 			}
 		}
 	);
 }
 		
-function updateRealtime(id) {
+function updatePlantime(id) {
 	var date0 = document.getElementById("update_date").value;
 	var params = {};
 	params.id = id;
 	params.start_time = date0 + ' ' + document.getElementById("update_start_time").value;
 	params.stop_time = date0 + ' ' + document.getElementById("update_stop_time").value;
-	params.comment = document.getElementById("update_comment").value;
 
 	send_request_post(
-		'api/time/realtime_update.php',
+		'api/time/plantime_update.php',
 		createUrlFromObj(params),
 		function (obj) {
 			if (obj.result == 'fail') {
 				alert(obj.error.message);
 				return;
 			} else {
-				loadRealTimePanel();
+				loadPlanTimePanel();
 				closeModalDialog();
 			}
 		}
