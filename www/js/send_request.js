@@ -86,3 +86,32 @@ function closeModalDialog()
     document.onkeydown = null;
 }
 
+function send_request_files(url, files, callbackf) {
+
+	var tmpXMLhttp = null;
+	if (window.XMLHttpRequest) {
+		// code for IE7+, Firefox, Chrome, Opera, Safari
+		tmpXMLhttp=new XMLHttpRequest();
+	};
+	tmpXMLhttp.onreadystatechange=function() {
+		if (tmpXMLhttp.readyState==4 && tmpXMLhttp.status==200) {
+			if(tmpXMLhttp.responseText == "")
+				alert("error");
+			else
+			{
+				// alert(tmpXMLhttp.responseText);
+				var obj = JSON.parse(tmpXMLhttp.responseText);
+				callbackf(obj);
+				tmpXMLhttp = null;
+			}
+		}
+	}
+	
+	
+	var formData = new FormData();
+	for(i = 0; i < files.length; i++)
+		formData.append(files[i].name, files[i]);
+
+	tmpXMLhttp.open("POST", url, true);
+	tmpXMLhttp.send(formData);
+};

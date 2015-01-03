@@ -8,6 +8,7 @@
 		<script type="text/javascript" src="js/realtime.js"></script>
 		<script type="text/javascript" src="js/plantime.js"></script>
 		<script type="text/javascript" src="js/analyzertime.js"></script>
+		<script type="text/javascript" src="js/export_import.js"></script>
 		<script type="text/javascript" src="js/about.js"></script>
 		<script type="text/javascript" src="js/calendar.js"></script>
 		<script type="text/javascript" src="js/auth.js"></script>
@@ -53,7 +54,7 @@
 <div class="menu_btn" onclick="loadRealTimePanel();">Real time</div>
 <div class="menu_btn" onclick="loadPlanTimePanel();">Plan time</div>
 <div class="menu_btn" onclick="loadAnalyzerTimePanel();">Analyzer time</div>
-<div class="menu_btn" onclick="export();">Export</div>
+<div class="menu_btn" onclick="export_import();">Export/Import</div>
 <div class="menu_btn" onclick="loadAbout();">About</div>
 <div class="menu_btn" onclick="logout();">Logout</div>
 </div>
