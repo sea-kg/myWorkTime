@@ -36,6 +36,7 @@ function loadRealTimePanel()
 
 			for (var i = 0; i < obj.data.length; i++) {
 				
+				var day = obj.data[i].day;
 				var date1 = obj.data[i].start_time.split(' ')[0];
 				var time1 = obj.data[i].start_time.split(' ')[1];
 				var date2 = obj.data[i].stop_time.split(' ')[0];
@@ -43,7 +44,7 @@ function loadRealTimePanel()
 
 				content = '';
 				content += '<div class="time_row" onclick="editFormRealtime(' + obj.data[i].id + ');">\n';
-				content += '	<div class="time_cell">' + date1 + '</div>\n';
+				content += '	<div class="time_cell">' + date1 + ' (' + day + ') </div>\n';
 				content += '	<div class="time_cell">' + time1 + '-' + time2 + '</div>\n';
 				content += '	<div class="time_cell">' + obj.data[i].sum + '</div>\n';
 				content += '	<div class="time_cell"><pre>' + obj.data[i].comment + '</pre></div>\n';

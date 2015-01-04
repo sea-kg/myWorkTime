@@ -42,13 +42,17 @@ if (mwtBase::issetParam('start_time') && mwtBase::issetParam('stop_time'))
 		$result['result'] = 'ok';
 		while ($row = $stmt->fetch())
 		{
+			$day = $row['start_time'];
+			$day = strtotime($day);
+			$day = date("D", $day);
+
 			$result['data'][] = array(
 				'id' => $row['id'],
 				'start_time' => $row['start_time'],
 				'stop_time' => $row['stop_time'],
 				'sum' => $row['d'],
 				'comment' => $row['comment'],
-				
+				'day' => $day,
 			);
 		}
 	} catch(PDOException $e) {
