@@ -1,0 +1,36 @@
+.index_body {
+	width: 100%;
+	height: 100%;
+	background-color: #CCC;
+	padding: 0px;
+	margin: 0px;
+}
+
+.index_table {
+	width: 100%;
+	height: 100%;
+	color: #666FFF;
+}
+
+.index_input_form {
+	color: #666FFF;
+	background-color: #000;
+}
+
+.index_caption {
+	font-family: "Times New Roman", Times, serif;
+	text-align: center;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.index_button {
+	display: inline;
+	padding: 10px;
+	cursor: pointer;
+}
+
+.index_button:hover {
+	background-color: #fff000;
+	color: #000fff;
+}

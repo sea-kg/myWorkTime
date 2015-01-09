@@ -131,9 +131,12 @@
 	max-height: 100%;
 	max-width: 100%;
 	text-align: left;
-	/*overflow: auto;*/
-	-moz-border-radius: 10px;  /* аДаЛб firefox */
-	-webkit-border-radius: 10px;  /* аДаЛб Safari аИ Chrome */	
 }
 
+.footer_copyright {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #CCC;
+}
 
