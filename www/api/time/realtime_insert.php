@@ -22,6 +22,10 @@ if (mwtBase::issetParam('start_time') && mwtBase::issetParam('stop_time') && mwt
 
 	try {
 		
+		if (mwtBase::findOverlapsPeriods_Realtime($conn, $start_time, $stop_time, 0, $userid) > 0) {
+			mwtBase::throwError(1106, 'Period overlaps with other period');
+		}
+		
 		$stmt = $conn->prepare('INSERT INTO realtime(start_time, stop_time, comment, userid) VALUES(?,?,?,?)');
 		if ($stmt->execute(array($start_time,$stop_time,$comment,$userid)) == 1);
 			$result['result'] = 'ok';

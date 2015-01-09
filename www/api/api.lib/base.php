@@ -33,4 +33,18 @@ class mwtBase {
 		}
 		return $count;
 	}
+	
+	static function findOverlapsPeriods_Realtime($conn, $start_time, $stop_time, $id, $userid) {
+		$count = 0;
+		$select_check = 'SELECT count(*) as cnt FROM realtime WHERE ((start_time <= ? AND stop_time > ?) OR (start_time < ? AND stop_time >= ?) OR (start_time = ? AND stop_time = ?)) AND id <> ? AND userid = ?';
+		$params_select_check = array($start_time,$start_time,$stop_time,$stop_time,$start_time,$stop_time,$id, $userid);
+		$stmt_check = $conn->prepare($select_check);
+		$stmt_check->execute($params_select_check);
+		if ($row = $stmt_check->fetch())
+		{
+			$result['cnt'] = $row['cnt'];
+			$count = $row['cnt'];
+		}
+		return $count;
+	}
 }

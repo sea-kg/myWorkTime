@@ -96,7 +96,6 @@ function insertRealtime() {
 	params.stop_time = date0 + ' ' + document.getElementById("insert_stop_time").value;
 	params.comment = document.getElementById("insert_comment").value;
 
-
 	if (!check_time(params.start_time)) {
 		document.getElementById("showmodal_error_msg").innerHTML = 
 			'Incorrect format of datetime<br>(got: ' + params.start_time + '),<br>expeted 2015-01-29 00:00:00';
@@ -115,7 +114,7 @@ function insertRealtime() {
 		createUrlFromObj(params),
 		function (obj) {
 			if (obj.result == 'fail') {
-				alert(obj.error.message);
+				document.getElementById("showmodal_error_msg").innerHTML = obj.error.message;
 				return;
 			} else {
 				loadRealTimePanel();
@@ -189,20 +188,20 @@ function updateRealtime(id) {
 			'Incorrect format of datetime<br>(got: ' + params.start_time + '),<br>expeted 2015-01-29 00:00:00';
 		return;
 	}
-	
+
 	if (!check_time(params.stop_time)) {
 		document.getElementById("showmodal_error_msg").innerHTML = 
 			'Incorrect format of datetime<br>(got: ' + params.stop_time + '),<br>expeted 2015-01-29 00:00:00';
 		return;
 	}
 
-
+	// alert(createUrlFromObj(params));
 	send_request_post(
 		'api/time/realtime_update.php',
 		createUrlFromObj(params),
 		function (obj) {
 			if (obj.result == 'fail') {
-				alert(obj.error.message);
+				document.getElementById("showmodal_error_msg").innerHTML = obj.error.message;
 				return;
 			} else {
 				loadRealTimePanel();

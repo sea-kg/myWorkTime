@@ -28,6 +28,10 @@ if (
 
 	try {
 		
+		if (mwtBase::findOverlapsPeriods_Realtime($conn, $start_time, $stop_time, $id, $userid) > 0) {
+			mwtBase::throwError(1107, 'Period overlaps with other period');
+		}
+
 		$stmt = $conn->prepare(
 		'	UPDATE realtime SET
 				start_time = ?,
