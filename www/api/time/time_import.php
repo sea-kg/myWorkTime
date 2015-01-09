@@ -42,8 +42,11 @@ for($i = 0; $i < count($keys); $i++)
 			$start_time = $realtime->getAttribute('start_time');
 			$stop_time = $realtime->getAttribute('stop_time');
 			$comment = $realtime->nodeValue;
-			// todo: check insert or update!!!!
-			try {		
+			try {
+				if (mwtBase::findOverlapsPeriods_Realtime($conn, $start_time, $stop_time, 0, $userid) > 0) {
+					continue;
+				}
+
 				$stmt = $conn->prepare('INSERT INTO realtime(start_time, stop_time, comment, userid) VALUES(?,?,?,?)');
 				if ($stmt->execute(array($start_time,$stop_time,$comment,$userid)) == 1);
 					$result[$filename] = 'ok';
@@ -57,11 +60,15 @@ for($i = 0; $i < count($keys); $i++)
 		foreach ($node as $plantime) {
 			$start_time = $plantime->getAttribute('start_time');
 			$stop_time = $plantime->getAttribute('stop_time');
-			// todo: check insert or update!!!!
 			try {
+				if (mwtBase::findOverlapsPeriods_Plantime($conn, $start_time, $stop_time, 0) > 0) {
+					continue;
+				}
+
 				$stmt = $conn->prepare('INSERT INTO plantime(start_time, stop_time) VALUES(?,?)');
 				if ($stmt->execute(array($start_time,$stop_time)) == 1);
 					$result[$filename] = 'ok';
+				
 			} catch(PDOException $e) {
 				mwtBase::throwError(1006, $e);
 			}
