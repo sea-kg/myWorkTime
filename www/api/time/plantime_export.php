@@ -45,7 +45,12 @@ if (mwtBase::issetParam('start_time') && mwtBase::issetParam('stop_time'))
 		
 		Header('Content-type: text/xml');
 		header('Content-Disposition:attachment;filename="myworktime_plantime_'.$start_time.'_'.$stop_time.'.xml"');
-		print($mwt->asXML());
+		
+		$dom = new DOMDocument("1.0");
+		$dom->preserveWhiteSpace = false;
+		$dom->formatOutput = true;
+		$dom->loadXML($mwt->asXML());
+		print($dom->saveXML());
 		exit;
 
 	} catch(PDOException $e) {
