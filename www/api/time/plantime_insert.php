@@ -19,7 +19,11 @@ if (mwtBase::issetParam('start_time') && mwtBase::issetParam('stop_time'))
 	$stop_time = mwtBase::getParam('stop_time', '0000-00-00 00:00:00');
 
 	try {
-		
+
+		if (mwtBase::findOverlapsPeriods_Plantime($conn, $start_time, $stop_time, 0) > 0) {
+			mwtBase::throwError(1108, 'Period overlaps with other period');
+		}
+
 		$stmt = $conn->prepare('INSERT INTO plantime(start_time, stop_time) VALUES(?,?)');
 		if ($stmt->execute(array($start_time,$stop_time)) == 1);
 			$result['result'] = 'ok';

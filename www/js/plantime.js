@@ -103,14 +103,13 @@ function insertPlantime() {
 			'Incorrect format of datetime<br>(got: ' + params.stop_time + '),<br>expeted 2015-01-29 00:00:00';
 		return;
 	}
-
 	// alert(createUrlFromObj(params));
 	send_request_post(
 		'api/time/plantime_insert.php',
 		createUrlFromObj(params),
 		function (obj) {
 			if (obj.result == 'fail') {
-				alert(obj.error.message);
+				document.getElementById("showmodal_error_msg").innerHTML = obj.error.message;
 				return;
 			} else {
 				loadPlanTimePanel();
@@ -189,12 +188,13 @@ function updatePlantime(id) {
 		return;
 	}
 
+	// alert(createUrlFromObj(params));
 	send_request_post(
 		'api/time/plantime_update.php',
 		createUrlFromObj(params),
 		function (obj) {
 			if (obj.result == 'fail') {
-				alert(obj.error.message);
+				document.getElementById("showmodal_error_msg").innerHTML = obj.error.message;
 				return;
 			} else {
 				loadPlanTimePanel();

@@ -24,6 +24,9 @@ if (
 	$id = mwtBase::getParam('id', 0);
 
 	try {
+		if (mwtBase::findOverlapsPeriods_Plantime($conn, $start_time, $stop_time, $id) > 0) {
+			mwtBase::throwError(1107, 'Period overlaps with other period');
+		}
 		
 		$stmt = $conn->prepare(
 		'	UPDATE plantime SET
