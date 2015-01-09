@@ -23,6 +23,7 @@ function loadPlanTimePanel()
 				return;
 			}
 			tt.innerHTML = '\n';
+			tt.innerHTML += '<div class="btn" onclick="insertFormPlantime();">add new</div>';
 			
 			var content = '';
 			content += '<div class="time_row_h">\n';
@@ -60,7 +61,7 @@ function loadPlanTimePanel()
 		}
  	);
 	
-	el.innerHTML += '<div class="btn" onclick="insertFormPlantime();">add new</div>';
+	
 };
 
 function insertFormPlantime() {

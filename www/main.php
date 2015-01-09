@@ -5,6 +5,7 @@
 		<link href='css/menu.css' rel='stylesheet' type='text/css'>
 		<link href='css/menu2.css' rel='stylesheet' type='text/css'>
 		<script type="text/javascript" src="js/send_request.js"></script>
+		<script type="text/javascript" src="js/select_time.js"></script>
 		<script type="text/javascript" src="js/realtime.js"></script>
 		<script type="text/javascript" src="js/plantime.js"></script>
 		<script type="text/javascript" src="js/analyzertime.js"></script>
@@ -14,6 +15,10 @@
 		<script type="text/javascript" src="js/auth.js"></script>
 	</head>
 <body class="body">
+
+<div id="select_time" class="select_time">
+	Something;
+</div>
 
 <div id="modal_dialog" class="overlay">
 	<div class="overlay_table">
@@ -32,7 +37,6 @@
 	</div>
 </div>
 
-	
 <div class="menu_panel">
 <!-- http://htmlweb.ru/java/example/calendar.php -->
 <!-- div class="menu_item">
@@ -44,10 +48,10 @@
 		onclick="event.cancelBubble=true;this.select();lcs(this)">
 </div><br><br -->
 <div class="menu_item">
-	From <input type="text" id="start_time" value="yyyy-mm-dd 00:00:00">
+	From <input type="text" id="start_time" value="yyyy-mm-dd 00:00:00"> <div class="menu_select_time" onclick="select_time('start_time');"><img src="img/select_time.png"/></div>
 </div>
 <div class="menu_item">
-	To <input type="text" id="stop_time" value="yyyy-mm-dd 23:00:00">
+	To <input type="text" id="stop_time" value="yyyy-mm-dd 23:00:00"> <div class="menu_select_time" onclick="select_time('stop_time');"><img src="img/select_time.png"/></div>
 </div><br><br>
 <!-- other menu -->
 

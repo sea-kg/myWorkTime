@@ -23,6 +23,8 @@ function loadRealTimePanel()
 				return;
 			}
 			tt.innerHTML = '\n';
+			tt.innerHTML += '<div class="btn" onclick="insertFormRealtime();">add new</div>';
+
 			// tt.innerHTML += '<div> Summary time: ' + obj.sum_time + '</div>';
 			
 			var content = '';
@@ -62,8 +64,6 @@ function loadRealTimePanel()
 			tt.innerHTML += content;
 		}
  	);
-	
-	el.innerHTML += '<div class="btn" onclick="insertFormRealtime();">add new</div>';
 };
 
 function insertFormRealtime() {

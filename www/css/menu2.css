@@ -8,8 +8,40 @@
 .menu_item {
 	display: inline;
 	padding: 10px;
-	cursor: pointer;
 	margin: 10px;
+}
+
+.select_time {
+	display: none;
+	position: fixed;
+	background-color: black;
+	padding: 2px;
+	margin: 2px;
+	color: #666fff;
+	border: 1px solid white;
+}
+
+.menu_select_time {
+	display: inline;
+	padding: 2px;
+	cursor: pointer;
+	margin: 2px;
+}
+
+.menu_select_time:hover {
+	background-color: #fff000;
+	color: #000fff;
+}
+
+.select_time_btn {
+	padding: 2px;
+	cursor: pointer;
+	margin: 2px;
+}
+
+.select_time_btn:hover {
+	background-color: #fff000;
+	color: #000fff;
 }
 
 .menu_btn {
