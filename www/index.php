@@ -11,7 +11,7 @@ if(mwtAuth::isLogin())
 
 <html>
 	<head>
-		<title> Мое время </title>
+		<title>My Work Time</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<script type="text/javascript" src="js/send_request.js"></script>
 		<script type="text/javascript" src="js/auth.js"></script>
