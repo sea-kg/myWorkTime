@@ -16,10 +16,6 @@
 	</head>
 <body class="body">
 
-<div id="select_time" class="select_time">
-	Something;
-</div>
-
 <div id="modal_dialog" class="overlay">
 	<div class="overlay_table">
 		<div class="overlay_cell">
@@ -28,13 +24,17 @@
 					Текст посередине DIV
 				</div>
 				<div class="overlay_close">
-					<div class="btn" href="javascript:void(0);" onclick="closeModalDialog();">
+					<div class="menu_btn" href="javascript:void(0);" onclick="closeModalDialog();">
 						Close
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
+
+<div id="select_time" class="select_time">
+	Something;
 </div>
 
 <div class="menu_panel">
@@ -48,10 +48,10 @@
 		onclick="event.cancelBubble=true;this.select();lcs(this)">
 </div><br><br -->
 <div class="menu_item">
-	From <input type="text" id="start_time" value="yyyy-mm-dd 00:00:00"> <div class="menu_select_time" onclick="select_time('start_time');"><img src="img/select_time.png"/></div>
+	From <input type="text" id="start_time" value="yyyy-mm-dd 00:00:00"> <div class="menu_select_time" onclick="select_datetime('start_time');"><img src="img/select_time.png"/></div>
 </div>
 <div class="menu_item">
-	To <input type="text" id="stop_time" value="yyyy-mm-dd 23:00:00"> <div class="menu_select_time" onclick="select_time('stop_time');"><img src="img/select_time.png"/></div>
+	To <input type="text" id="stop_time" value="yyyy-mm-dd 23:00:00"> <div class="menu_select_time" onclick="select_datetime('stop_time');"><img src="img/select_time.png"/></div>
 </div><br><br>
 <!-- other menu -->
 

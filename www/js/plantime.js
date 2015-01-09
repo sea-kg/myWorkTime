@@ -1,4 +1,46 @@
 
+function autoFillTimePlanTime() {
+	var start_time = document.getElementById("start_time").value;
+	var stop_time = document.getElementById("stop_time").value;
+
+	var d_start = new Date(start_time.replace(/(\d{4,4})-(\d{2,2})-(\d{2,2})/, '$2/$3/$1'));
+	var d_stop =  new Date( stop_time.replace(/(\d{4,4})-(\d{2,2})-(\d{2,2})/, '$2/$3/$1'));
+
+	var content = "";
+
+	while(d_start < d_stop) {
+	
+		// if mon - fri
+		if (d_start.getDay() >= 1  && d_start.getDay() <= 5) {
+			var day = ""
+				+ d_start.getFullYear() + "-"
+				+ ("0" + (d_start.getMonth()+1)).slice(-2) + "-"
+				+ d_start.getDate();
+			
+			// content +=  day + " 09:00:00 - " + day + " 13:00:00" + "\n";
+			// content +=  day + " 14:00:00 - " + day + " 18:00:00" + "\n";
+
+			send_request_post(
+				'api/time/plantime_insert.php',
+				createUrlFromObj({"start_time": day + " 09:00:00", "stop_time": day + " 13:00:00"}),
+				function (obj) {
+				}
+			);
+			
+			send_request_post(
+				'api/time/plantime_insert.php',
+				createUrlFromObj({"start_time": day + " 14:00:00", "stop_time": day + " 18:00:00"}),
+				function (obj) {
+				}
+			);
+		}
+
+		// add next day
+		d_start.setDate(d_start.getDate() + 1);
+	}
+	loadPlanTimePanel();
+}
+
 function loadPlanTimePanel()
 {
 	var el = document.getElementById("content");
@@ -33,7 +75,8 @@ function loadPlanTimePanel()
 				return;
 			}
 			tt.innerHTML = '\n';
-			tt.innerHTML += '<div class="btn" onclick="insertFormPlantime();">add new</div>';
+			tt.innerHTML += '<div class="btn" onclick="insertFormPlantime();">add new</div> | ';
+			tt.innerHTML += '<div class="btn" onclick="autoFillTimePlanTime();">auto fill time</div>';
 			
 			var content = '';
 			content += '<div class="time_row_h">\n';
@@ -79,9 +122,9 @@ function insertFormPlantime() {
 	var start_time = document.getElementById("start_time").value;
 	start_time = start_time.split(' ')[0];
 	content += 'Date: <input id="insert_date" type="text" value="' + start_time + '"><br>';
-	content += 'Time from <input id="insert_start_time" type="text" value="00:00:00"> <br>';
-	content += 'Time to <input id="insert_stop_time" type="text" value="00:00:00"><br>';
-	content += '<div class="btn" onclick="insertPlantime();">insert</div>';
+	content += 'Time from <input id="insert_start_time" type="text" value="00:00:00">' + create_elem_select_time('insert_start_time') + '<br>';
+	content += 'Time to <input id="insert_stop_time" type="text" value="00:00:00">' + create_elem_select_time('insert_stop_time') + '<br>';
+	content += '<div class="menu_btn" onclick="insertPlantime();">insert</div>';
 	content += '<div id="showmodal_error_msg" class="error"></div>';
 	showModalDialog(content);
 }
@@ -138,8 +181,8 @@ function editFormPlantime(id) {
 				content += 'Date: <input id="update_date" type="text" value="' + date0 + '"><br>';
 				content += 'Time from <input id="update_start_time" type="text" value="' + start_time + '"> <br>';
 				content += 'Time to <input id="update_stop_time" type="text" value="' + stop_time + '"><br>';
-				content += '<div class="btn" onclick="updatePlantime(' + id + ');">update</div> ';
-				content += '<div class="btn" onclick="deletePlantime(' + id + ');">delete</div>';
+				content += '<div class="menu_btn" onclick="updatePlantime(' + id + ');">update</div> ';
+				content += '<div class="menu_btn" onclick="deletePlantime(' + id + ');">delete</div>';
 				content += '<div id="showmodal_error_msg" class="error"></div>';
 				showModalDialog(content);
 			}

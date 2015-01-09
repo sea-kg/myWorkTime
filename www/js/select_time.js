@@ -1,15 +1,15 @@
-function select_time_close() {
+function select_datetime_close() {
 	var st = document.getElementById('select_time');
 	st.style.display = "none";	
 }
 
-function set_select_time(idel, time) {
+function set_select_datetime(idel, time) {
 	var el = document.getElementById(idel);
 	el.value = time;
-	select_time_close();
+	select_datetime_close();
 }
 	
-function select_time(idel) {
+function select_datetime(idel) {
 	var el = document.getElementById(idel);
 	var st = document.getElementById('select_time');
 	var bodyRect = document.body.getBoundingClientRect();
@@ -20,7 +20,7 @@ function select_time(idel) {
 	var currentdate = new Date();
 	var month = "" + (currentdate.getMonth()+1);
 	if (month.length < 2)
-		month = "0" + month;	
+		month = "0" + month;
 	var datetime = currentdate.getFullYear() + "-" + month + "-" + currentdate.getDate();
 
 	var arr = [];
@@ -31,20 +31,46 @@ function select_time(idel) {
 	arr.push('9999-12-31 23:59:00');
 
 	for (var i = 0; i < arr.length; i++) 
-		st.innerHTML += '<div class="select_time_btn" onclick="set_select_time(\'' + idel + '\', \'' + arr[i] + '\');">' + arr[i] + '</div>';
+		st.innerHTML += '<div class="select_time_btn" onclick="set_select_datetime(\'' + idel + '\', \'' + arr[i] + '\');">' + arr[i] + '</div>';
 	
-	st.innerHTML += '<div class="select_time_btn" onclick="select_time_close();">close</div>';
+	st.innerHTML += '<div class="select_time_btn" onclick="select_datetime_close();">close</div>';
 	
 	st.style.display = "inline";
 	st.style.position = "absolute";
 	st.style.left = elRect.left;
 	st.style.top = elRect.top + elRect.height;
-	
-	
+}
 
-//     alert('Element is ' + offset + ' vertical pixels from <body>');
+function select_time(idel) {
+	var el = document.getElementById(idel);
+	var st = document.getElementById('select_time');
+	var bodyRect = document.body.getBoundingClientRect();
+	var elRect = el.getBoundingClientRect();
+	offset  = elRect.top - bodyRect.top;
+	st.innerHTML = "";
 
-// 	alert(idel);
+	var arr = [];
+	arr.push('00:00:00');
+	arr.push('09:00:00');
+	arr.push('13:00:00');
+	arr.push('14:00:00');
+	arr.push('18:00:00');
+	arr.push('23:59:00');
+
+	for (var i = 0; i < arr.length; i++) 
+		st.innerHTML += '<div class="select_time_btn" onclick="set_select_datetime(\'' + idel + '\', \'' + arr[i] + '\');">' + arr[i] + '</div>';
+	
+	st.innerHTML += '<div class="select_time_btn" onclick="select_datetime_close();">close</div>';
+
+	st.style.display = "inline";
+	st.style.position = "absolute";
+	st.style.left = elRect.left;
+	st.style.top = elRect.top + elRect.height;
+}
+
+function create_elem_select_time(idelem)
+{
+	return '<div class="menu_select_time" onclick="select_time(\'' + idelem + '\');"><img src="img/select_time.png"/></div>';
 }
 
 function check_time(time)

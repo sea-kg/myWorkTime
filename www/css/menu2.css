@@ -11,39 +11,6 @@
 	margin: 10px;
 }
 
-.select_time {
-	display: none;
-	position: fixed;
-	background-color: black;
-	padding: 2px;
-	margin: 2px;
-	color: #666fff;
-	border: 1px solid white;
-}
-
-.menu_select_time {
-	display: inline;
-	padding: 2px;
-	cursor: pointer;
-	margin: 2px;
-}
-
-.menu_select_time:hover {
-	background-color: #fff000;
-	color: #000fff;
-}
-
-.select_time_btn {
-	padding: 2px;
-	cursor: pointer;
-	margin: 2px;
-}
-
-.select_time_btn:hover {
-	background-color: #fff000;
-	color: #000fff;
-}
-
 .menu_btn {
 	display: inline;
 	padding: 10px;
@@ -153,9 +120,9 @@
 
 .overlay_content {
 	display: inline-block;
-	color: #000000;
+	color: #666fff;
 	padding: 15px;
-	background-color: #ffffff;
+	background-color: #000;
 	border: 5px solid #606060;
 	border-radius: 10px;
 	min-height: 50px;
@@ -179,4 +146,38 @@
 .comment {
 	width: 500px;
 	height: 100px;
+}
+
+.select_time {
+	display: none;
+	position: fixed;
+	background-color: black;
+	padding: 2px;
+	margin: 2px;
+	color: #666fff;
+	border: 1px solid white;
+	z-index: 1000;
+}
+
+.menu_select_time {
+	display: inline;
+	padding: 2px;
+	cursor: pointer;
+	margin: 2px;
+}
+
+.menu_select_time:hover {
+	background-color: #fff000;
+	color: #000fff;
+}
+
+.select_time_btn {
+	padding: 2px;
+	cursor: pointer;
+	margin: 2px;
+}
+
+.select_time_btn:hover {
+	background-color: #fff000;
+	color: #000fff;
 }
