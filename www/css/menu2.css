@@ -172,3 +172,11 @@
     background-color: #CCC;
 }
 
+.error {
+	color: red;
+}
+
+.comment {
+	width: 500px;
+	height: 100px;
+}

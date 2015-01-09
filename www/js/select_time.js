@@ -26,6 +26,9 @@ function select_time(idel) {
 	var arr = [];
 	arr.push(datetime + ' 00:00:00');
 	arr.push(datetime + ' 23:59:00');
+	
+	arr.push('0000-00-00 00:00:00');
+	arr.push('9999-12-31 23:59:00');
 
 	for (var i = 0; i < arr.length; i++) 
 		st.innerHTML += '<div class="select_time_btn" onclick="set_select_time(\'' + idel + '\', \'' + arr[i] + '\');">' + arr[i] + '</div>';
@@ -42,4 +45,11 @@ function select_time(idel) {
 //     alert('Element is ' + offset + ' vertical pixels from <body>');
 
 // 	alert(idel);
+}
+
+function check_time(time)
+{
+	var reg = new RegExp("^[0-9]{4,4}-[0-9]{2,2}-[0-9]{2,2} [0-9]{2,2}:[0-9]{2,2}:[0-9]{2,2}$", "i");
+	return reg.test(time);
+	// return false;
 }

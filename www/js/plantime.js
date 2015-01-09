@@ -6,6 +6,16 @@ function loadPlanTimePanel()
 	params.start_time = document.getElementById("start_time").value;
 	params.stop_time = document.getElementById("stop_time").value;
 	
+	if (!check_time(params.start_time)) {
+		el.innerHTML = '<div class="error">Incorrect format of datetime (got: ' + params.start_time + '), expeted 2015-01-29 00:00:00</div>';
+		return;
+	}
+	
+	if (!check_time(params.stop_time)) {
+		el.innerHTML = '<div class="error">Incorrect format of datetime (got: ' + params.stop_time + '), expeted 2015-01-29 00:00:00</div>';
+		return;
+	}
+
 	el.innerHTML = 'Plantime from ' + params.start_time + ' to ' + params.stop_time + ' <br>\n';
 	el.innerHTML += '\n<div class="time_table" id="table_time"></div>\n';
 
@@ -72,6 +82,7 @@ function insertFormPlantime() {
 	content += 'Time from <input id="insert_start_time" type="text" value="00:00:00"> <br>';
 	content += 'Time to <input id="insert_stop_time" type="text" value="00:00:00"><br>';
 	content += '<div class="btn" onclick="insertPlantime();">insert</div>';
+	content += '<div id="showmodal_error_msg" class="error"></div>';
 	showModalDialog(content);
 }
 
@@ -80,6 +91,18 @@ function insertPlantime() {
 	var params = {};
 	params.start_time = date0 + ' ' + document.getElementById("insert_start_time").value;
 	params.stop_time = date0 + ' ' + document.getElementById("insert_stop_time").value;
+
+	if (!check_time(params.start_time)) {
+		document.getElementById("showmodal_error_msg").innerHTML = 
+			'Incorrect format of datetime<br>(got: ' + params.start_time + '),<br>expeted 2015-01-29 00:00:00';
+		return;
+	}
+	
+	if (!check_time(params.stop_time)) {
+		document.getElementById("showmodal_error_msg").innerHTML = 
+			'Incorrect format of datetime<br>(got: ' + params.stop_time + '),<br>expeted 2015-01-29 00:00:00';
+		return;
+	}
 
 	// alert(createUrlFromObj(params));
 	send_request_post(
@@ -118,6 +141,7 @@ function editFormPlantime(id) {
 				content += 'Time to <input id="update_stop_time" type="text" value="' + stop_time + '"><br>';
 				content += '<div class="btn" onclick="updatePlantime(' + id + ');">update</div> ';
 				content += '<div class="btn" onclick="deletePlantime(' + id + ');">delete</div>';
+				content += '<div id="showmodal_error_msg" class="error"></div>';
 				showModalDialog(content);
 			}
 		}
@@ -152,6 +176,18 @@ function updatePlantime(id) {
 	params.id = id;
 	params.start_time = date0 + ' ' + document.getElementById("update_start_time").value;
 	params.stop_time = date0 + ' ' + document.getElementById("update_stop_time").value;
+
+	if (!check_time(params.start_time)) {
+		document.getElementById("showmodal_error_msg").innerHTML = 
+			'Incorrect format of datetime<br>(got: ' + params.start_time + '),<br>expeted 2015-01-29 00:00:00';
+		return;
+	}
+	
+	if (!check_time(params.stop_time)) {
+		document.getElementById("showmodal_error_msg").innerHTML = 
+			'Incorrect format of datetime<br>(got: ' + params.stop_time + '),<br>expeted 2015-01-29 00:00:00';
+		return;
+	}
 
 	send_request_post(
 		'api/time/plantime_update.php',

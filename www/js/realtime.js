@@ -6,6 +6,16 @@ function loadRealTimePanel()
 	params.start_time = document.getElementById("start_time").value;
 	params.stop_time = document.getElementById("stop_time").value;
 	
+	if (!check_time(params.start_time)) {
+		el.innerHTML = '<div class="error">Incorrect format of datetime (got: ' + params.start_time + '), expeted 2015-01-29 00:00:00</div>';
+		return;
+	}
+	
+	if (!check_time(params.stop_time)) {
+		el.innerHTML = '<div class="error">Incorrect format of datetime (got: ' + params.stop_time + '), expeted 2015-01-29 00:00:00</div>';
+		return;
+	}
+	
 	el.innerHTML = 'Realtime from ' + params.start_time + ' to ' + params.stop_time + ' <br>\n';
 	el.innerHTML += '\n<div class="time_table" id="table_time"></div>\n';
 
@@ -73,8 +83,9 @@ function insertFormRealtime() {
 	content += 'Date: <input id="insert_date" type="text" value="' + start_time + '"><br>';
 	content += 'Time from <input id="insert_start_time" type="text" value="00:00:00"> <br>';
 	content += 'Time to <input id="insert_stop_time" type="text" value="00:00:00"><br>';
-	content += 'Comment:<br> <textarea id="insert_comment"></textarea><br>';
+	content += 'Comment:<br> <textarea class="comment" id="insert_comment"></textarea><br>';
 	content += '<div class="btn" onclick="insertRealtime();">insert</div>';
+	content += '<div id="showmodal_error_msg" class="error"></div>';
 	showModalDialog(content);
 }
 
@@ -85,6 +96,19 @@ function insertRealtime() {
 	params.stop_time = date0 + ' ' + document.getElementById("insert_stop_time").value;
 	params.comment = document.getElementById("insert_comment").value;
 
+
+	if (!check_time(params.start_time)) {
+		document.getElementById("showmodal_error_msg").innerHTML = 
+			'Incorrect format of datetime<br>(got: ' + params.start_time + '),<br>expeted 2015-01-29 00:00:00';
+		return;
+	}
+	
+	if (!check_time(params.stop_time)) {
+		document.getElementById("showmodal_error_msg").innerHTML = 
+			'Incorrect format of datetime<br>(got: ' + params.stop_time + '),<br>expeted 2015-01-29 00:00:00';
+		return;
+	}
+	
 	// alert(createUrlFromObj(params));
 	send_request_post(
 		'api/time/realtime_insert.php',
@@ -120,9 +144,10 @@ function editFormRealtime(id) {
 				content += 'Date: <input id="update_date" type="text" value="' + date0 + '"><br>';
 				content += 'Time from <input id="update_start_time" type="text" value="' + start_time + '"> <br>';
 				content += 'Time to <input id="update_stop_time" type="text" value="' + stop_time + '"><br>';
-				content += 'Comment:<br> <textarea id="update_comment">' + obj.data.comment + '</textarea><br>';
+				content += 'Comment:<br> <textarea class="comment" id="update_comment">' + obj.data.comment + '</textarea><br>';
 				content += '<div class="btn" onclick="updateRealtime(' + id + ');">update</div> ';
 				content += '<div class="btn" onclick="deleteRealtime(' + id + ');">delete</div>';
+				content += '<div id="showmodal_error_msg" class="error"></div>';
 				showModalDialog(content);
 			}
 		}
@@ -158,6 +183,19 @@ function updateRealtime(id) {
 	params.start_time = date0 + ' ' + document.getElementById("update_start_time").value;
 	params.stop_time = date0 + ' ' + document.getElementById("update_stop_time").value;
 	params.comment = document.getElementById("update_comment").value;
+
+	if (!check_time(params.start_time)) {
+		document.getElementById("showmodal_error_msg").innerHTML = 
+			'Incorrect format of datetime<br>(got: ' + params.start_time + '),<br>expeted 2015-01-29 00:00:00';
+		return;
+	}
+	
+	if (!check_time(params.stop_time)) {
+		document.getElementById("showmodal_error_msg").innerHTML = 
+			'Incorrect format of datetime<br>(got: ' + params.stop_time + '),<br>expeted 2015-01-29 00:00:00';
+		return;
+	}
+
 
 	send_request_post(
 		'api/time/realtime_update.php',
