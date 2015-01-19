@@ -1,3 +1,18 @@
+<?php
+	include_once "config/config.php";
+	include_once "api/api.lib/auth.php";
+
+	if(!mwtAuth::isLogin())
+	{
+		refreshTo("index.php");
+		return;
+	};
+
+	$start_date = isset($_SESSION['user_myworktime']['start_date']) ?;
+	$end_date = isset($_SESSION['user_myworktime']['end_date']) ? ;
+	
+?>
+
 <html>
 	<head>
 		<title>My Work Time</title>

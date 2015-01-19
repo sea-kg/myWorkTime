@@ -10,10 +10,10 @@ class mwtAuth {
 			if ($stmt->rowCount() != 1)
 				return false;
 			$row = $stmt->fetch();
-			$_SESSION['user'] = array();
-			$_SESSION['user']['id'] = $row['id'];
-			$_SESSION['user']['email'] = $row['email'];
-			$_SESSION['user']['role'] = $row['role'];
+			$_SESSION['user_myworktime'] = array();
+			$_SESSION['user_myworktime']['id'] = $row['id'];
+			$_SESSION['user_myworktime']['email'] = $row['email'];
+			$_SESSION['user_myworktime']['role'] = $row['role'];
 			return true;
 		} catch(PDOException $e) {
 			return false;
@@ -21,14 +21,14 @@ class mwtAuth {
 	}
 	
 	static function isLogin() {
-		return isset($_SESSION['user']);
+		return isset($_SESSION['user_myworktime']);
 	}
 	
 	static function userid() {
-		return isset($_SESSION['user']) && isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : 0;
+		return isset($_SESSION['user_myworktime']) && isset($_SESSION['user_myworktime']['id']) ? $_SESSION['user_myworktime']['id'] : 0;
 	}
 	
 	static function tryLogout($conn) {
-		unset($_SESSION['user']);
+		unset($_SESSION['user_myworktime']);
 	}	
 }

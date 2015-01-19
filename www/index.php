@@ -28,11 +28,11 @@ if(mwtAuth::isLogin())
 			</tr>
 			<tr>
 				<td>Name</td>
-				<td><input name="email" id="email" value="" type="text" onkeydown="if (event.keyCode == 13) login();"></td>
+				<td><input name="email" id="email" placeholder="your@email.com" value="" type="text" onkeydown="if (event.keyCode == 13) login();"></td>
 			</tr>
 			<tr>
 				<td>Password</td>
-				<td><input name="password" id="password" value="" type="password"  onkeydown="if (event.keyCode == 13) login();"></td>
+				<td><input name="password" id="password" placeholder="****" value="" type="password"  onkeydown="if (event.keyCode == 13) login();"></td>
 			</tr>
 			<tr>
 				<td colspan=2>
