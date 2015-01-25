@@ -7,10 +7,10 @@
 		refreshTo("index.php");
 		return;
 	};
-
-	$start_date = isset($_SESSION['user_myworktime']['start_date']) ?;
-	$end_date = isset($_SESSION['user_myworktime']['end_date']) ? ;
 	
+	$date_now = date('Y-m-d');
+	$start_date = isset($_SESSION['user_myworktime']['start_date']) ? $_SESSION['user_myworktime']['start_date'] : $date_now.' 00:00:00';
+	$end_date = isset($_SESSION['user_myworktime']['end_date']) ? $_SESSION['user_myworktime']['end_date'] : $date_now.' 23:59:00';
 ?>
 
 <html>
@@ -63,11 +63,13 @@
 		onclick="event.cancelBubble=true;this.select();lcs(this)">
 </div><br><br -->
 <div class="menu_item">
-	From <input type="text" id="start_time" value="yyyy-mm-dd 00:00:00"> <div class="menu_select_time" onclick="select_datetime('start_time');"><img src="img/select_time.png"/></div>
+	<input type="text" id="start_time" value="<? echo $start_date; ?>"> - 
+	<input type="text" id="stop_time" value="<? echo $end_date; ?>">
 </div>
 <div class="menu_item">
-	To <input type="text" id="stop_time" value="yyyy-mm-dd 23:00:00"> <div class="menu_select_time" onclick="select_datetime('stop_time');"><img src="img/select_time.png"/></div>
-</div><br><br>
+	<div class="menu_select_time" onclick="select_datetime('start_time', 'stop_time');">Choose periode</div>
+</div>
+<br><br>
 <!-- other menu -->
 
 <div class="menu_btn" onclick="loadRealTimePanel();">Real time</div>
