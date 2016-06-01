@@ -19,10 +19,7 @@ if (mwtBase::issetParam('start_time') && mwtBase::issetParam('stop_time'))
 	$stop_time = mwtBase::getParam('stop_time', '0000-00-00 00:00:00');
 	$userid = mwtAuth::userid();
 
-	$format = 'xml';
-	if(mwtBase::issetParam('format')){
-		$format = mwtBase::getParam('format');
-	}
+	$format = mwtBase::getParam('format', 'xml');
 	if($format == 'text'){
 		
 	}else if($format == 'xml'){
@@ -68,14 +65,14 @@ if (mwtBase::issetParam('start_time') && mwtBase::issetParam('stop_time'))
 			$hours = ($minutes - $min) / 60;
 			$mwt .= 'Summery time: '.$hours.':'.$min." min \n\n";
 		}
-	
+
 		$start_time = str_replace(':', '', $start_time);
 		$stop_time = str_replace(':', '', $stop_time);
 		$start_time = str_replace('-', '', $start_time);
 		$stop_time = str_replace('-', '', $stop_time);
 		$start_time = str_replace(' ', '_', $start_time);
 		$stop_time = str_replace(' ', '_', $stop_time);
-		
+
 		if($format == 'xml'){
 			Header('Content-type: text/xml');
 			header('Content-Disposition:attachment;filename="myworktime_realtime_'.$start_time.'_'.$stop_time.'.xml"');
