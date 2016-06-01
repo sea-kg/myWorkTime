@@ -20,25 +20,32 @@ function import_time()
 function export_import()
 {
 	var el = document.getElementById("content");
-	var params = {};
-	params.start_time = document.getElementById("start_time").value;
-	params.stop_time = document.getElementById("stop_time").value;
+	var params_xml = {};
+	params_xml.start_time = document.getElementById("start_time").value;
+	params_xml.stop_time = document.getElementById("stop_time").value;
+	params_xml.format = 'xml';
+	
+	var params_text = {};
+	params_text.start_time = document.getElementById("start_time").value;
+	params_text.stop_time = document.getElementById("stop_time").value;
+	params_text.format = 'text';
 
-	if (!check_time(params.start_time)) {
-		el.innerHTML = '<div class="error">Incorrect format of datetime (got: ' + params.start_time + '), expeted 2015-01-29 00:00:00</div>';
+	if (!check_time(params_xml.start_time)) {
+		el.innerHTML = '<div class="error">Incorrect format of datetime (got: ' + params_xml.start_time + '), expeted 2015-01-29 00:00:00</div>';
 		return;
 	}
 	
-	if (!check_time(params.stop_time)) {
-		el.innerHTML = '<div class="error">Incorrect format of datetime (got: ' + params.stop_time + '), expeted 2015-01-29 00:00:00</div>';
+	if (!check_time(params_xml.stop_time)) {
+		el.innerHTML = '<div class="error">Incorrect format of datetime (got: ' + params_xml.stop_time + '), expeted 2015-01-29 00:00:00</div>';
 		return;
 	}
 
-	el.innerHTML = 'Export from ' + params.start_time + ' to ' + params.stop_time + ' \n';
-	el.innerHTML += '<a href="api/time/realtime_export.php?' + createUrlFromObj(params) + '">realtime</a>\n';
-	el.innerHTML += '<a href="api/time/plantime_export.php?' + createUrlFromObj(params) + '">plantime</a> <br>\n';
-
-	el.innerHTML += '<br><br><input type="file" id="import_files"/> <div class="btn" onclick="import_time();">Import</div><br>\n';
+	el.innerHTML = 'Export from ' + params_xml.start_time + ' to ' + params_xml.stop_time + ' <br><ul>';
+	el.innerHTML += '<li><a href="api/time/realtime_export.php?' + createUrlFromObj(params_xml) + '">realtime (xml)</a></li>';
+	el.innerHTML += '<li><a href="api/time/realtime_export.php?' + createUrlFromObj(params_text) + '">realtime (text)</a></li>';
+	el.innerHTML += '<li><a href="api/time/plantime_export.php?' + createUrlFromObj(params_xml) + '">plantime</a></li>';
+	el.innerHTML += '<ul>';
+	el.innerHTML += '<br><input type="file" id="import_files"/> <div class="btn" onclick="import_time();">Import</div><br>\n';
 }
 
 
