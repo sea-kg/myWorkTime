@@ -63,8 +63,8 @@
 		onclick="event.cancelBubble=true;this.select();lcs(this)">
 </div><br><br -->
 <div class="menu_item">
-	<input type="text" id="start_time" value="<? echo $start_date; ?>"> - 
-	<input type="text" id="stop_time" value="<? echo $end_date; ?>">
+	<input type="text" id="start_time" value="<?php echo $start_date; ?>"> - 
+	<input type="text" id="stop_time" value="<?php echo $end_date; ?>">
 </div>
 <div class="menu_item">
 	<div class="menu_select_time" onclick="select_datetime('start_time', 'stop_time');">Choose periode</div>
